@@ -11,6 +11,7 @@ const ColorList = ({ colors, updateColors, getBubbles }) => {
   console.log(colors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
+  const [newColor, setNewColor] = useState(initialColor);
 
   const editColor = color => {
     setEditing(true);
@@ -42,6 +43,16 @@ const ColorList = ({ colors, updateColors, getBubbles }) => {
       })
       .catch(err => console.log('Error on deleting color: ', err))
     };
+
+    const addColor = () => {
+      axiosWithAuth()
+      .post("/colors", newColor)
+      .get((res) => {
+        console.log(res);
+        getBubbles();
+      })
+      .then(err => console.log("Error adding Color: ", err))
+    }
 
   return (
     <div className="colors-wrap">
@@ -98,6 +109,28 @@ const ColorList = ({ colors, updateColors, getBubbles }) => {
       )}
       <div className="spacer" />
       {/* stretch - build another form here to add a color */}
+      <form onSubmit={addColor}>
+      <legend>Add Color</legend>
+          <label>
+          <input
+            type="text"
+            name="color"
+            onChange={e => setNewColor({...newColor, color: e.target.value })}
+            value={newColor.color}
+          />
+          </label>
+          <label>
+          <input
+          type="text"
+          name="hexcode"
+          onChange={e => setNewColor({...newColor, code: { hex: e.target.value }})}
+          value={newColor.code.hex}
+          />
+          </label>
+          <div className="button-row">
+            <button type="submit">save</button>
+          </div>
+      </form>
     </div>
   );
 };
