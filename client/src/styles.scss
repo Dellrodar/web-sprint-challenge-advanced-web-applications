@@ -96,4 +96,9 @@ form {
 		padding: 3px 8px;
 		margin-top: 16px;
 	}
+
+	.contact {
+		display: flex;
+		flex-direction: column;
+	}
 }

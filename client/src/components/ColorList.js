@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {axiosWithAuth} from '../utils/AxiosWithAuth';
+import {Link} from 'react-router-dom';
 
 
 const initialColor = {
@@ -108,6 +109,7 @@ const ColorList = ({ colors, updateColors, getBubbles }) => {
         </form>
       )}
       <div className="spacer" />
+      <Link to="/contactus">Contact Us</Link>
       {/* stretch - build another form here to add a color */}
       <form onSubmit={addColor}>
       <legend>Add Color</legend>
