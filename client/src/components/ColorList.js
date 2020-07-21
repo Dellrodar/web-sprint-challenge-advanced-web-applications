@@ -45,14 +45,15 @@ const ColorList = ({ colors, updateColors, getBubbles }) => {
       .catch(err => console.log('Error on deleting color: ', err))
     };
 
-    const addColor = () => {
+    const addColor = e => {
+      e.preventDefault();
       axiosWithAuth()
       .post("/colors", newColor)
-      .get((res) => {
+      .then((res) => {
         console.log(res);
         getBubbles();
       })
-      .then(err => console.log("Error adding Color: ", err))
+      .catch(err => console.log("Error adding Color: ", err))
     }
 
   return (
